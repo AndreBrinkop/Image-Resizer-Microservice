@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/AndreBrinkop/ImageResizerKubernetesMicroservice/issues"
   },
-  "homepage": "https://github.com/AndreBrinkop/ImageResizerKubernetesMicroservice#readme"
+  "homepage": "https://github.com/AndreBrinkop/ImageResizerKubernetesMicroservice#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
