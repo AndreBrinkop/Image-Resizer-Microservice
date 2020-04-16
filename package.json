@@ -1,0 +1,19 @@
+{
+  "name": "image-resizer-microservice",
+  "version": "1.0.0",
+  "description": "Basic HTTP API to resize images",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreBrinkop/ImageResizerKubernetesMicroservice.git"
+  },
+  "author": "André Brinkop",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreBrinkop/ImageResizerKubernetesMicroservice/issues"
+  },
+  "homepage": "https://github.com/AndreBrinkop/ImageResizerKubernetesMicroservice#readme"
+}
