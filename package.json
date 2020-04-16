@@ -18,6 +18,7 @@
   "homepage": "https://github.com/AndreBrinkop/ImageResizerKubernetesMicroservice#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "multer": "^1.4.2",
     "sharp": "^0.25.2"
   }
 }
