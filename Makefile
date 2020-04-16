@@ -1,6 +1,5 @@
 install:
 	npm install
-	eslint --init
 
 test:
 	npm run test
