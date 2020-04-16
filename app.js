@@ -5,7 +5,7 @@ const sharp = require('sharp');
 var app = express();
 var imageUpload = multer().single('image');
 
-app.post('/getInfo', function (req, res) {
+app.post('/image-details', function (req, res) {
     imageUpload(req, res, function (err) {
         if (err || req.file == undefined) {
             return res.status(400).end("Invalid request. Make sure the request body contains an image.");
