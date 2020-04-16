@@ -1,4 +1,5 @@
-var express = require('express');
+const express = require('express');
+const sharp = require('sharp');
 var app = express();
 
 app.get('/', function (req, res) {
