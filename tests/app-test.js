@@ -3,7 +3,7 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const fs = require('fs')
 const sharp = require('sharp')
-const server = require('../app')
+const server = require('../src/app')
 const expect = chai.expect
 
 chai.use(chaiAsPromised)

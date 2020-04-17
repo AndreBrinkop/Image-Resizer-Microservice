@@ -4,8 +4,8 @@
   "description": "Basic HTTP API to resize images",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "lint": "eslint .",
+    "start": "node src/app.js",
+    "lint": "eslint src/.",
     "test": "mocha tests/."
   },
   "repository": {
