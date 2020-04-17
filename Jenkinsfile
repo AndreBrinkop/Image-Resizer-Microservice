@@ -1,8 +1,10 @@
+def dockerImage
+
 pipeline {
   agent any
   environment {
     HOME="."
-    IMAGE_NAME = "andrebrinkop/image-resizer-microservice"
+    IMAGE_NAME = "abrinkop/image-resizer-microservice"
   }
   stages {
     stage('Setup') {
@@ -23,7 +25,16 @@ pipeline {
     stage('Build image') {
       steps {
         script {
-          docker.build("${env.IMAGE_NAME}:${env.BUILD_ID}")
+          dockerImage = docker.build("${env.IMAGE_NAME}:${env.BUILD_ID}")
+        }
+      }
+    }
+    stage('Upload image') {
+      steps {
+        script {
+          docker.withRegistry('', 'docker-hub') {
+            dockerImage.push()
+          }
         }
       }
     }
