@@ -50,8 +50,8 @@ app.post('/resize-image', function (req, res) {
     })
 })
 
-app.listen(3000, function () {
+const server = app.listen(3000, function () {
     console.log('ImageResizer is listening on port 3000!')
 })
 
-exports = module.exports = app;
+exports = module.exports = server;
