@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node src/app.js",
-    "lint": "eslint src/. && hadolint Dockerfile",
+    "lint": "npx eslint src/. && hadolint Dockerfile",
     "test": "mocha tests/."
   },
   "repository": {
