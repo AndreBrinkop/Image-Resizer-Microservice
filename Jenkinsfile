@@ -11,5 +11,10 @@ pipeline {
         sh 'make lint'
       }
     }
+    stage('Testing') {
+      steps {
+        sh 'make test'
+      }
+    }
   }
 }
