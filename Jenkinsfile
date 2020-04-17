@@ -23,6 +23,9 @@ pipeline {
       }
     }
     stage('Build image') {
+      when {
+        branch 'master'
+      }
       steps {
         script {
           dockerImage = docker.build("${env.IMAGE_NAME}:${env.BUILD_ID}")
@@ -30,6 +33,9 @@ pipeline {
       }
     }
     stage('Upload image') {
+      when {
+        branch 'master'
+      }
       steps {
         script {
           docker.withRegistry('', 'docker-hub') {
