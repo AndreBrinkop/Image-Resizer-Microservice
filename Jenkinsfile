@@ -1,7 +1,11 @@
 pipeline {
   agent any
+  environment {
+    HOME="."
+    IMAGE_NAME = "andrebrinkop/image-resizer-microservice"
+  }
   stages {
-    stage('Build') {
+    stage('Setup') {
       steps {
         sh 'npm install'
       }
@@ -14,6 +18,13 @@ pipeline {
     stage('Testing') {
       steps {
         sh 'make test'
+      }
+    }
+    stage('Build image') {
+      steps {
+        script {
+          docker.build("${env.IMAGE_NAME}:${env.BUILD_ID}")
+        }
       }
     }
   }
