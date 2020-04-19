@@ -14,8 +14,8 @@ else
     command_output=$(aws --region $REGION_CODE cloudformation update-stack --stack-name $NETWORK_STACK_NAME --template-body file://network.yml --parameters file://network-params.json  2>&1)
     echo "${command_output}"
     command_result=$?
-    if [[ $? -ne 0 && $command_result == *'No updates are to be performed.' ]] ; then
-      echo "No updates are to be performed."
+    if [[ $? -ne 0 && $command_result == *'No updates are to be performed'* ]] ; then
+      echo "No updates available."
       set -e
     elif [ $command_result -ne 0 ] ; then
       echo "Updating Stack failed: $command_result"
@@ -39,8 +39,8 @@ else
     command_output=$(aws --region $REGION_CODE cloudformation update-stack --stack-name $CLUSTER_STACK_NAME --template-body file://cluster.yml --parameters file://cluster-params.json --capabilities CAPABILITY_NAMED_IAM  2>&1)
     echo "${command_output}"
     command_result=$?
-    if [[ $command_result -ne 0 && $command_output == *'No updates are to be performed.' ]] ; then
-      echo "No updates are to be performed."
+    if [[ $command_result -ne 0 && $command_output == *'No updates are to be performed'* ]] ; then
+      echo "No updates available."
       set -e
     elif [ $command_result -ne 0 ] ; then
       echo "Updating Stack failed: $command_output"
