@@ -63,7 +63,7 @@ pipeline {
       steps {
         withAWS(region:'us-east-1',credentials:'aws-eks-credentials') {
           dir('kubernetes') {
-            sh "sed 's/BUILD_NUMBER/${env.BUILD_ID}/g' deployment.yml"
+            sh "sed -i 's/BUILD_NUMBER/${env.BUILD_ID}/g' deployment.yml"
             sh 'echo $(cat deployment.yml)'
             sh 'echo $(aws eks get-token --region us-east-1 --cluster-name ImageResizerMicroservice)'
             sh './deploy_to_eks.sh'
