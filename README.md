@@ -25,6 +25,7 @@ The implemented app provides the following endpoints:
 
 ```
 POST /image-details
+
 Description:
 Returns the format and the size information (width and height) for the provided image.
 
@@ -45,6 +46,7 @@ Responses:
 
 ```
 POST /resize-image
+
 Description:
 Resizes a provided image to the specified dimensions.
 If the specified dimensions do have a different aspect ratio as the original picture letterboxing
