@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "EnvironmentName",
+    "ParameterValue": "ImageResizerMicroservice"
+  },
+  {
+    "ParameterKey": "ClusterNodeInstanceType",
+    "ParameterValue": "t3.small"
+  }
+]

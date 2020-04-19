@@ -1,0 +1,43 @@
+Description: >
+    Andre Brinkop - Creates the EKS cluster
+Parameters:
+    EnvironmentName:
+        Description: 'An Environment name that will be prefixed to resources'
+        Type: String
+    ClusterNodeInstanceType:
+        Description: 'The instance type that is used for cluster nodes'
+        Type: String
+Resources:
+    EKSClusterIAMRole:
+        Type: 'AWS::IAM::Role'
+        Properties:
+            AssumeRolePolicyDocument: {Version: '2012-10-17', Statement: [{Effect: Allow, Principal: {Service: [eks.amazonaws.com]}, Action: ['sts:AssumeRole']}]}
+            ManagedPolicyArns: ['arn:aws:iam::aws:policy/AmazonEKSClusterPolicy', 'arn:aws:iam::aws:policy/AmazonEKSServicePolicy']
+    NodeInstanceRole:
+        Type: 'AWS::IAM::Role'
+        Properties:
+            AssumeRolePolicyDocument: {Version: '2012-10-17', Statement: [{Effect: Allow, Principal: {Service: [ec2.amazonaws.com]}, Action: ['sts:AssumeRole']}]}
+            ManagedPolicyArns: ["arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy", "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy", "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"]
+    EKSCluster:
+        Type: 'AWS::EKS::Cluster'
+        Properties:
+            Name: !Sub "${EnvironmentName}"
+            ResourcesVpcConfig: {SubnetIds: {'Fn::Split': [',', {'Fn::ImportValue': {'Fn::Sub': '${EnvironmentName}-PUB-NETS'}}]}}
+            RoleArn: !GetAtt EKSClusterIAMRole.Arn
+    EKSNodeGroup:
+        Type: 'AWS::EKS::Nodegroup'
+        DependsOn: EKSCluster
+        Properties:
+            ClusterName: !Sub "${EnvironmentName}"
+            NodeRole: !GetAtt NodeInstanceRole.Arn
+            AmiType: AL2_x86_64
+            DiskSize: 5
+            InstanceTypes: [!Sub '${ClusterNodeInstanceType}']
+            ScalingConfig: {MinSize: 1, DesiredSize: 2, MaxSize: 2}
+            Subnets: {'Fn::Split': [',', {'Fn::ImportValue': !Sub "${EnvironmentName}-PUB-NETS"}]}
+Outputs:
+    EKSEndpoint:
+        Description: 'The url to the EKS cluster'
+        Value: !GetAtt EKSCluster.Endpoint
+        Export:
+          Name: !Sub '${EnvironmentName}-EKS-Endpoint'
