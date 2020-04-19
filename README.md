@@ -72,10 +72,10 @@ Responses:
 
 ## Setup the Environment
 
-* Create a virtualenv and activate it
+* Install `Node.js` and `npm`
 * Run `make install` to install the necessary dependencies
 
 ### Running
 
-1. Standalone:  `Make all`
-2. Docker:  `docker build --tag=image-resizer . && docker run -p 80:3000 image-resizer`
+1. Standalone:  `make run`
+1. Docker:  `docker build --tag=image-resizer . && docker run -p 80:3000 image-resizer`
