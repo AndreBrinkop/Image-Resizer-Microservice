@@ -31,4 +31,4 @@ else
     fi
 fi
 echo "Stack Details:"
-echo aws cloudformation describe-stacks --region $REGION_CODE --stack-name $CLUSTER_STACK_NAME
+echo $(aws cloudformation describe-stacks --region $REGION_CODE --stack-name $CLUSTER_STACK_NAME)
