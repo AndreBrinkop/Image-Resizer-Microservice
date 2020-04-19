@@ -62,7 +62,7 @@ pipeline {
       }
       steps {
         dir('cloudformation') {
-          sh 'sed 's/$BUILD_NUMBER/${env.BUILD_ID}/g' deployment.yml'
+          sh 'sed "s/$BUILD_NUMBER/${env.BUILD_ID}/g" deployment.yml'
           sh './deploy_to_eks.sh'
         }
       }
