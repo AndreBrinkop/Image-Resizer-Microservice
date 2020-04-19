@@ -17,7 +17,7 @@ else
       set -e
     elif [ $? -ne 0 ] ; then
       echo "Updating Stack failed: $command_output"
-      exit $result_status
+      exit 1
     else
     set -e
       aws --region $REGION_CODE cloudformation wait stack-update-complete --stack-name $NETWORK_STACK_NAME
@@ -40,7 +40,7 @@ else
       set -e
     elif [ $? -ne 0 ] ; then
       echo "Updating Stack failed: $command_output"
-      exit $result_status
+      exit 1
     else
     set -e
       aws --region $REGION_CODE cloudformation wait stack-update-complete --stack-name $CLUSTER_STACK_NAME
