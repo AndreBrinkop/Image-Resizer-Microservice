@@ -16,6 +16,7 @@ else
       echo "No updates are to be performed."
       set -e
     elif [ $? -ne 0 ] ; then
+      echo "Updating Stack failed: $command_output"
       exit $result_status
     else
     set -e
@@ -38,6 +39,7 @@ else
       echo "No updates are to be performed."
       set -e
     elif [ $? -ne 0 ] ; then
+      echo "Updating Stack failed: $command_output"
       exit $result_status
     else
     set -e
