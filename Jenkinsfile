@@ -61,7 +61,7 @@ pipeline {
         branch 'master'
       }
       steps {
-        dir('cloudformation') {
+        dir('kubernetes') {
           sh "sed 's/$BUILD_NUMBER/${env.BUILD_ID}/g' deployment.yml"
           sh './deploy_to_eks.sh'
         }
