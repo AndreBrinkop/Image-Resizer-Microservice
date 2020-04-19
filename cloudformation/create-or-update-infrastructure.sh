@@ -35,8 +35,6 @@ else
     echo "Updating Stack: $CLUSTER_STACK_NAME"
     set +e
     command_output=$(aws --region $REGION_CODE cloudformation update-stack --stack-name $CLUSTER_STACK_NAME --template-body file://cluster.yml --parameters file://cluster-params.json --capabilities CAPABILITY_NAMED_IAM  2>&1)
-    echo "${command_output}"
-    command_result=$?
     if [[ $command_result -ne 0 && $command_output == *'No updates are to be performed'* ]] ; then
       echo "No updates available."
       set -e
