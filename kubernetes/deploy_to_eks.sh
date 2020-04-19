@@ -8,7 +8,9 @@ aws eks --region $REGION_CODE update-kubeconfig --name $CLUSTER_NAME
 echo "Deploy application and setup Load Balancer"
 kubectl apply -f deployment.yml
 
-echo ""
+sleep 5
+
+echo "\n"
 echo "Image Resizer Microservice (Load Balancer) Hostname:"
 hostname=$(kubectl get services/image-resizer-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 echo $hostname
