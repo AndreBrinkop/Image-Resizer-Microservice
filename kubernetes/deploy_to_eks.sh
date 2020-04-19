@@ -10,7 +10,7 @@ kubectl apply -f deployment.yml
 
 sleep 5
 
-echo '\n'
+echo ""
 echo 'Image Resizer Microservice (Load Balancer) Hostname:'
 hostname=$(kubectl get services/image-resizer-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 echo $hostname
