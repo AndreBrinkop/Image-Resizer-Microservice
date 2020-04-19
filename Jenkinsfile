@@ -45,16 +45,27 @@ pipeline {
       }
     }
     stage('Create/Update EKS Cluster') {
-          when {
-            branch 'master'
-          }
-          steps {
-            withAWS(region:'us-east-1',credentials:'aws-eks-credentials') {
-              dir('cloudformation') {
-                sh './create-or-update-infrastructure.sh'
-              }
-            }
+      when {
+        branch 'master'
+      }
+      steps {
+        withAWS(region:'us-east-1',credentials:'aws-eks-credentials') {
+          dir('cloudformation') {
+            sh './create-or-update-infrastructure.sh'
           }
         }
+      }
+    }
+    stage('Deploy Container to EKS') {
+      when {
+        branch 'master'
+      }
+      steps {
+        dir('cloudformation') {
+          sh 'sed 's/$BUILD_NUMBER/${env.BUILD_ID}/g' deployment.yml'
+          sh './deploy_to_eks.sh'
+        }
+      }
+    }
   }
 }
