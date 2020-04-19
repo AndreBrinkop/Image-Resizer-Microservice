@@ -47,7 +47,8 @@ Responses:
 POST /resize-image
 Description:
 Resizes a provided image to the specified dimensions.
-If the specified dimensions do have a different aspect ratio as the original picture letterboxing is be used to prevent the image from being clinched/streteched.
+If the specified dimensions do have a different aspect ratio as the original picture letterboxing
+is be used to prevent the image from being clinched/streteched.
 
 Parameters:
 * image: image file
