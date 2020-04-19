@@ -36,7 +36,7 @@ else
     set +e
     command_output=$(aws --region $REGION_CODE cloudformation update-stack --stack-name $CLUSTER_STACK_NAME --template-body file://cluster.yml --parameters file://cluster-params.json --capabilities CAPABILITY_NAMED_IAM  2>&1)
     if [[ $? -ne 0 && $command_output == *'No updates are to be performed.' ]] ; then
-      echo "test >${?}< >${command_output}<
+      echo "test >${?}< >${command_output}<"
       echo "No updates are to be performed."
       set -e
     elif [ $? -ne 0 ] ; then
