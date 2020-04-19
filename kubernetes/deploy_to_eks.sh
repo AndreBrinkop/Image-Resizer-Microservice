@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 CLUSTER_NAME='ImageResizerMicroservice'
 REGION_CODE='us-east-1'
 
