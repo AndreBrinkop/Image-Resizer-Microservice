@@ -5,6 +5,10 @@ const sharp = require('sharp')
 const app = express()
 const imageUpload = multer().single('image')
 
+app.get('/', (req, res) => {
+  res.send('Image Resizer is working!')
+})
+
 app.post('/image-details', (req, res) => {
   imageUpload(req, res, err => {
     if (err || req.file === undefined) {
