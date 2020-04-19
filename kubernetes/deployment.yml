@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: image-resizer
-        image: abrinkop/image-resizer-microservice:$BUILD_NUMBER # replaced by Jenkins
+        image: abrinkop/image-resizer-microservice:BUILD_NUMBER # replaced by Jenkins
         ports:
         - containerPort: 3000
 

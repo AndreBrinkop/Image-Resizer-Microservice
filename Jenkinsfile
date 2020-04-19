@@ -61,9 +61,11 @@ pipeline {
         branch 'master'
       }
       steps {
-        dir('kubernetes') {
-          sh "sed 's/$BUILD_NUMBER/${env.BUILD_ID}/g' deployment.yml"
-          sh './deploy_to_eks.sh'
+        withAWS(region:'us-east-1',credentials:'aws-eks-credentials') {
+          dir('kubernetes') {
+            sh "sed 's/BUILD_NUMBER/${env.BUILD_ID}/g' deployment.yml"
+            sh './deploy_to_eks.sh'
+          }
         }
       }
     }
