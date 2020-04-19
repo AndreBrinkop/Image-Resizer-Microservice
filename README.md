@@ -1,7 +1,8 @@
 # Image Resizer Microservice
+This project contains a simple microservice to resize images and the necessary CI/CD Pipeline and Infrastructure as Code (CloudFormation) templates to completely automtically operationalize this microservice. The provided automation scripts can easily be adapted to work with other services as well.
 
 ## Project Overview
-This project contains a Node.JS microservice that allows users to resize images using an HTTP Post endpoint.\
+This project contains a Node.js microservice that allows users to resize images using an HTTP Post endpoint.\
 It contains the source code to the Node.JS app and all the necessary files and scripts to operationalize the Microservice  using an automated CI/CD Pipeline implemented in Jenkins that builds a Docker image and deploys an AWS EKS (Kubernetes) cluster that will be used to run the Docker container.
 
 The CI/CD Pipeline takes care of the following steps:
