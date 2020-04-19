@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 REGION_CODE='us-east-1'
 
 NETWORK_STACK_NAME='ImageResizerNetwork'
@@ -10,9 +10,16 @@ if ! aws cloudformation describe-stacks --region $REGION_CODE --stack-name $NETW
     aws --region $REGION_CODE cloudformation wait stack-create-complete --stack-name $NETWORK_STACK_NAME
 else
     echo "Updating Stack: $NETWORK_STACK_NAME"
-    aws --region $REGION_CODE cloudformation update-stack --stack-name $NETWORK_STACK_NAME --template-body file://network.yml --parameters file://network-params.json
-    if [ $? -eq 0 ]; then
-        aws --region $REGION_CODE cloudformation wait stack-update-complete --stack-name $NETWORK_STACK_NAME
+    set +e
+    command_output=$(aws --region $REGION_CODE cloudformation update-stack --stack-name $NETWORK_STACK_NAME --template-body file://network.yml --parameters file://network-params.json ${@:3}  2>&1)
+    if [[ $? -ne 0 && $command_output == *'No updates are to be performed.' ]] ; then
+      echo "No updates are to be performed."
+      set -e
+    elif [ $? -ne 0 ] ; then
+      exit $result_status
+    else
+    set -e
+      aws --region $REGION_CODE cloudformation wait stack-update-complete --stack-name $NETWORK_STACK_NAME
     fi
 fi
 echo "Stack Details:"
@@ -25,9 +32,16 @@ if ! aws cloudformation describe-stacks --region $REGION_CODE --stack-name $CLUS
     aws --region $REGION_CODE cloudformation wait stack-create-complete --stack-name $CLUSTER_STACK_NAME
 else
     echo "Updating Stack: $CLUSTER_STACK_NAME"
-    aws --region $REGION_CODE cloudformation update-stack --stack-name $CLUSTER_STACK_NAME --template-body file://cluster.yml --parameters file://cluster-params.json --capabilities CAPABILITY_NAMED_IAM
-    if [ $? -eq 0 ]; then
-        aws --region $REGION_CODE cloudformation wait stack-update-complete --stack-name $CLUSTER_STACK_NAME
+    set +e
+    command_output=$(aws --region $REGION_CODE cloudformation update-stack --stack-name $CLUSTER_STACK_NAME --template-body file://cluster.yml --parameters file://cluster-params.json --capabilities CAPABILITY_NAMED_IAM ${@:3}  2>&1)
+    if [[ $? -ne 0 && $command_output == *'No updates are to be performed.' ]] ; then
+      echo "No updates are to be performed."
+      set -e
+    elif [ $? -ne 0 ] ; then
+      exit $result_status
+    else
+    set -e
+      aws --region $REGION_CODE cloudformation wait stack-update-complete --stack-name $CLUSTER_STACK_NAME
     fi
 fi
 echo "Stack Details:"
