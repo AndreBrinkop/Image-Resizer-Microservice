@@ -1,5 +1,5 @@
 #!/bin/bash
-REGION_CODE='us-west-1'
+REGION_CODE='us-east-1'
 
 NETWORK_STACK_NAME='ImageResizerNetwork'
 aws --region $REGION_CODE cloudformation create-stack --stack-name $NETWORK_STACK_NAME --template-body file://network.yml --parameters file://network-params.json
