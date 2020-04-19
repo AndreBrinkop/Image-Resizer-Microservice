@@ -37,7 +37,7 @@ Resources:
             Subnets: {'Fn::Split': [',', {'Fn::ImportValue': !Sub "${EnvironmentName}-PUB-NETS"}]}
 Outputs:
     EKSEndpoint:
-        Description: 'Endpoint url to the EKS cluster'
+        Description: 'The endpoint url to the EKS cluster'
         Value: !GetAtt EKSCluster.Endpoint
         Export:
           Name: !Sub '${EnvironmentName}-EKS-Endpoint'
